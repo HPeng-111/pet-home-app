@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!-- ============================================================ -->
+<!-- index.html — 网页入口文件                                      -->
+<!-- ============================================================ -->
+<!-- 这是浏览器加载的第一个文件，Vite 从这里开始构建整个 APP          -->
+<!-- 比喻：房子的地基——所有东西都建在这上面                          -->
+
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <!--
+      viewport（视口）设置：
+      width=device-width → 宽度 = 设备屏幕宽度（自适应手机/电脑）
+      initial-scale=1.0 → 初始缩放比例 100%
+      user-scalable=no → 禁止用户手动缩放（PWA 全屏体验）
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <!--
+      theme-color：浏览器地址栏颜色（Android Chrome）
+      #2196F3 = 蓝色，跟 APP 主题一致
+    -->
+    <meta name="theme-color" content="#2196F3" />
+    <!--
+      manifest.json：PWA 配置文件
+      告诉浏览器"这个网站可以安装到桌面"
+      rel="manifest"：指定清单文件路径
+    -->
+    <link rel="manifest" href="/pet-home-app/manifest.json" />
+    <!--
+      apple-touch-icon：iOS Safari 添加到主屏幕的图标
+    -->
+    <link rel="apple-touch-icon" href="/pet-home-app/icon-192.png" />
+    <title>宠物之家</title>
+    <script type="module" crossorigin src="/pet-home-app/assets/index-DO-qbBA7.js"></script>
+    <link rel="stylesheet" crossorigin href="/pet-home-app/assets/index-CqPJf4sH.css">
+  </head>
+  <body>
+    <!--
+      <div id="root">：React 的"挂载点"
+      main.tsx 里的 ReactDOM.createRoot 找到这个 div
+      然后把整个 APP 的内容渲染在里面
+      内容由 JavaScript 动态生成，所以这里空的就行
+    -->
+    <div id="root"></div>
+
+    <!--
+      Service Worker 注册脚本
+      Service Worker = 浏览器后台运行的"离线管家"
+      作用：
+      1. 缓存网页资源 → 离线也能打开 APP
+      2. 让浏览器识别这是个 PWA → 弹出"安装到桌面"提示
+    -->
+    <script>
+      // 检查浏览器是否支持 Service Worker
+      if ('serviceWorker' in navigator) {
+        // 注册 sw.js 为 Service Worker
+        // .register() 返回 Promise（异步操作）
+        navigator.serviceWorker.register('/sw.js')
+      }
+    </script>
+
+    <!--
+      <script type="module" src="/src/main.tsx">
+      Vite 的入口：加载并执行 main.tsx
+      type="module"：以 ES 模块方式加载（支持 import/export）
+    -->
+  </body>
+</html>
